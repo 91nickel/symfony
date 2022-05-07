@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello MainController!{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1>Редактирование записи {{ note.id }} {{ note.title }}</h1>
+        <div>
+            {% form_theme form with ['bootstrap_4_layout.html.twig'] %}
+            {{ form_start(form) }}
+            {{ form_row(form.title, {'attr' : {'placeholder' : 'Title'}}) }}
+            {{ form_row(form.description, {'attr' : {'placeholder' : 'Description'}}) }}
+            {{ form_end(form) }}
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello MainController!{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h2>Добавить новую запись</h2>
+
+        <div>
+            {% form_theme form with ['bootstrap_4_layout.html.twig'] %}
+            {{ form_start(form) }}
+            {{ form_row(form.title, {'attr' : {'placeholder' : 'Title'}}) }}
+            {{ form_row(form.description, {'attr' : {'placeholder' : 'Description'}}) }}
+            {{ form_end(form) }}
+        </div>
+        <br>
+        <h2>Все записи</h2>
+        <table class="table">
+            <thead class="thead-dark">
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Title</th>
+                <th scope="col">Description</th>
+                <th scope="col">Status</th>
+                <th scope="col">Category</th>
+                <th scope="col">Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for note in notes %}
+                <tr>
+                    <th scope="row">{{ note.id }}</th>
+                    <td>{{ note.title }}</td>
+                    <td>{{ note.description }}</td>
+                    <td>{{ note.status }}</td>
+                    <td>{{ note.category.name }}</td>
+                    <td>
+                        <a href="{{ path('edit_note', {'note': note.id}) }}" class="btn btn-warning">Редактировать</a>
+                        <a href="{{ path('remove_note', {'note': note.id}) }}" class="btn btn-danger">Удалить</a>
+                    </td>
+
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
